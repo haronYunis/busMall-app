@@ -51,6 +51,11 @@ function randomizer() {
 
 //Define the randomProduct function
 function randomProduct(e) {
+<<<<<<< HEAD
+=======
+
+  
+>>>>>>> 30ceadcabd37c3ad927957e48b80438ac11c8a5e
   // what ever images is randomly selected. make it the src for img element.
   var randIndex = randomizer();
   
