@@ -3,76 +3,116 @@
 
 // An array to push all of our instances too.
 Product.allProduct = [];
+
+// Total clicks on the page. Tracked by the eventListener at the bottom of the page
+Product.totalClick = 0;
+
+// An array that hold the latest displayed number
+Product.lastDisplayed = [];
+
+//Access the Ul element from the DOM
+var ulEl = document.getElementById('result');
+
+//access the section element from the HTML.
+var sectionEl = document.getElementById('productSection');
+
 // Product constructor function that makes a property for the filepath, name of image, number of times displayed and number of clicks.
-function Product(filepath, name, displayCount, clickCount) {
+function Product(filepath, name) {
   this.filepath = filepath;
   this.name = name;
-  this.displayCount = 0;
-  this.clickCount = 0;
+  this.timeDisplayed = 0;
+  this.vote = 0;
   Product.allProduct.push(this);
 }
 // instances for each picture
-new Product('img/bag.jpg','bag', this.displayCount, this.clickCount );
-new Product('img/banana.jpg','banana', this.displayCount, this.clickCount );
-new Product('img/bathroom.jpg','bathroom', this.displayCount, this.clickCount );
-new Product('img/boots.jpg', 'boots', this.displayCount, this.clickCount );
-new Product('img/breakfast.jpg', 'breakfast', this.displayCount, this.clickCount );
-new Product('img/bubblegum.jpg', 'bubblegum', this.displayCount, this.clickCount );
-new Product('img/chair.jpg','chair', this.displayCount, this.clickCount );
-new Product('img/cthulhu.jpg','cthulhu', this.displayCount, this.clickCount );
-new Product('img/dog-duck.jpg','dog-duck', this.displayCount, this.clickCount );
-new Product('img/dragon.jpg', 'dragon', this.displayCount, this.clickCount );
-new Product('img/pen.jpg', 'pen', this.displayCount, this.clickCount );
-new Product('img/pet-sweep.jpg', 'pet-sweep', this.displayCount, this.clickCount );
-new Product('img/scissors.jpg','scissors', this.displayCount, this.clickCount );
-new Product('img/shark.jpg','shark', this.displayCount, this.clickCount );
-new Product('img/sweep.png','sweep', this.displayCount, this.clickCount );
-new Product('img/tauntaun.jpg', 'tauntaun', this.displayCount, this.clickCount );
-new Product('img/unicorn.jpg', 'unicorn', this.displayCount, this.clickCount );
-new Product('img/usb.gif', 'usb', this.displayCount, this.clickCount );
-new Product('img/water-can.jpg', 'water-can', this.displayCount, this.clickCount );
-new Product('img/wine-glass.jpg', 'wine-glass', this.displayCount, this.clickCount );
+new Product('img/bag.jpg','bag');
+new Product('img/banana.jpg','banana');
+new Product('img/bathroom.jpg','bathroom');
+new Product('img/boots.jpg', 'boots');
+new Product('img/breakfast.jpg', 'breakfast');
+new Product('img/bubblegum.jpg', 'bubblegum');
+new Product('img/chair.jpg','chair');
+new Product('img/cthulhu.jpg','cthulhu');
+new Product('img/dog-duck.jpg','dog-duck');
+new Product('img/dragon.jpg', 'dragon');
+new Product('img/pen.jpg', 'pen');
+new Product('img/pet-sweep.jpg', 'pet-sweep');
+new Product('img/scissors.jpg','scissors');
+new Product('img/shark.jpg','shark');
+new Product('img/sweep.png','sweep');
+new Product('img/tauntaun.jpg', 'tauntaun');
+new Product('img/unicorn.jpg', 'unicorn');
+new Product('img/usb.png', 'usb');
+new Product('img/water-can.jpg', 'water-can');
+new Product('img/wine-glass.jpg', 'wine-glass');
 
 // pull in all three image elements from the DOM
-var imgEL = document.getElementById('product-pic1');
-var imgEL2 = document.getElementById('product-pic2');
-var imgEL3 = document.getElementById('product-pic3');
+var leftPic = document.getElementById('left-pic');
+var middlePic = document.getElementById('middle-pic');
+var rightPic = document.getElementById('right-pic');
 
-// add event listner that when item is clicked it saves the click and adds to the counter property.
-imgEL.addEventListener('click', randomProduct);
-imgEL2.addEventListener('click', randomProduct);
-imgEL3.addEventListener('click', randomProduct);
-
-function randomizer() {
+function randomProduct() {
   // pick a random number between 0 and the length of our array Product.allProduct. 
-  Math.floor(Math.random() * Product.allProduct.length);
-  return
+  var randomLeft = Math.floor(Math.random() * Product.allProduct.length);
+  var randomMiddle = Math.floor(Math.random() * Product.allProduct.length);
+  var randomRight = Math.floor(Math.random() * Product.allProduct.length);
+
+  // Test to make sure that neither random var above equal each other 
+  while (randomLeft === randomMiddle || randomLeft === randomRight || randomMiddle === randomRight || Product.lastDisplayed.includes(randomLeft) || Product.lastDisplayed.includes(randomMiddle) || Product.lastDisplayed.includes(randomRight)) {
+    var randomLeft = Math.floor(Math.random() * Product.allProduct.length);
+    var randomMiddle = Math.floor(Math.random() * Product.allProduct.length);
+    var randomRight = Math.floor(Math.random() * Product.allProduct.length);
+  }
+
+  Product.allProduct[randomLeft].timeDisplayed += 1;
+  Product.allProduct[randomMiddle].timeDisplayed += 1;
+  Product.allProduct[randomRight].timeDisplayed += 1;
+
+
+  // Using the random number generated index through the Prodcts.allProducts array
+  leftPic.src = Product.allProduct[randomLeft].filepath;
+  leftPic.alt = Product.allProduct[randomLeft].name;
+
+  middlePic.src = Product.allProduct[randomMiddle].filepath;
+  middlePic.alt = Product.allProduct[randomMiddle].name;
+
+  rightPic.src = Product.allProduct[randomRight].filepath;
+  rightPic.alt = Product.allProduct[randomRight].name;
+
+  //keep track of these 3 as the perviously displayed products.
+  Product.lastDisplayed[0] = randomLeft;
+  Product.lastDisplayed[1] = randomMiddle;
+  Product.lastDisplayed[2] = randomRight;
 }
 
-//Define the randomProduct function
-function randomProduct(e) {
-<<<<<<< HEAD
-=======
+function handleClick(e) {
+  //incremeant totalclicks property with each click.
+  
+  Product.totalClick += 1
+  console.log(e.target.alt)
+  
+  for (var i in Product.allProduct) {
+    if(e.target.alt === Product.allProduct[i].name) {
+      Product.allProduct[i].vote += 1;
+    }
+  }
 
-  
->>>>>>> 30ceadcabd37c3ad927957e48b80438ac11c8a5e
-  // what ever images is randomly selected. make it the src for img element.
-  var randIndex = randomizer();
-  
-  imgEL.src = Product.allProduct[randIndex].filepath;
-  
-   // what ever images is randomly selected. make it the src for img element.
-  imgEL2.src = Product.allProduct[randIndex].filepath;
-  
-  
-  // what ever images is randomly selected. make it the src for img element.
-  imgEL3.src = Product.allProduct[randIndex].filepath;
-  
+  if(Product.totalClick > 25) {
+    sectionEl.removeEventListener('click', handleClick);
+    showResults();
+  }else {
+    randomProduct();
+  }
 }
+
+function showResults() {
+  for(var i in Product.allProduct) {
+    var liEl = document.createElement('li');
+    liEl.textContent =  Product.allProduct[i].name + ' has ' + Product.allProduct[i].vote + ' votes and was displayed ' + Product.allProduct[i].timeDisplayed + ' times.';
+    ulEl.appendChild(liEl);
+  }
+}
+sectionEl.addEventListener('click', handleClick);
+
 
 randomProduct();
-// also track how many times each image is display even if its not being clicked.
-
-
-
-// After 25 click we want to remove the eventListner. Then display a list of the products with votes received with each list item looking like "3 votes for the Banana Slicer".
