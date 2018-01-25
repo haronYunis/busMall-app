@@ -20,6 +20,9 @@ var ulEl = document.getElementById('result');
 //access the section element from the HTML.
 var sectionEl = document.getElementById('productSection');
 
+// the canvas element that going to display our graph
+var context = document.getElementById('placeholder').getContext('2d');
+
 // Product constructor function that makes a property for the filepath, name of image, number of times displayed and number of clicks.
 function Product(filepath, name) {
   this.filepath = filepath;
@@ -111,7 +114,7 @@ function handleClick(e) {
     }
   }
   //if total clicks in greater than 25 
-  if(Product.totalClick > 4) {
+  if(Product.totalClick > 12) {
     //remove the event listner off the variable sectionEl which hold the html element section.
     sectionEl.removeEventListener('click', handleClick);
     showResults();
@@ -119,7 +122,7 @@ function handleClick(e) {
     
    //if its not greater continue with the randomProduct function that was invoked on page load.
   }else {
-    randomProduct();
+    randomProduct(); 
   }
 }
 
@@ -132,16 +135,13 @@ function showResults() {
 }
 
 function renderChart(){
-  var context = document.getElementById('placeholder').getContext('2d');
-
-
 
   var ProductChart = new Chart(context, {
     type: 'bar',
     data: {
       labels: productNames, 
       datasets: [{
-        label: 'Votes Per Goat',
+        label: 'Votes Per Product',
         data: productVote,
         backgroundColors: ['rgba(255, 99, 132, 0.2)',
         'rgba(54, 162, 235, 0.2)',
