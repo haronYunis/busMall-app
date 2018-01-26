@@ -23,19 +23,26 @@ img {
 
 #productSection {
   background-color: bisque;
-
+  position: relative;  
 }
 
 #left-pic, #middle-pic, #right-pic {
 margin: 20px;
 height: 17em;
+position: static;
+transition: 0.3s ease;
 
 }
 
+#left-pic:hover,#middle-pic:hover, #right-pic:hover   {
+  -webkit-transform: scale(1.3);
+  -ms-transform: scale(1.3);
+  transform: scale(1.3);
+}
 
 #placeholder{
   background-color: bisque;
-  margin: 10px;
+  margin: 5px;
   margin-bottom: 20%;
   position: relative;
     

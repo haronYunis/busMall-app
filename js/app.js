@@ -114,9 +114,11 @@ function handleClick(e) {
     }
   }
   //if total clicks in greater than 25 
-  if(Product.totalClick > 12) {
+  if(Product.totalClick > 24) {
     //remove the event listner off the variable sectionEl which hold the html element section.
     sectionEl.removeEventListener('click', handleClick);
+    localStorage.setItem('accumualatedVotes', JSON.stringify(Product.allProduct));
+    localStorage.setItem('accumulateDisplay', JSON.stringify(Product.allProduct));
     showResults();
     renderChart();
     
@@ -133,6 +135,7 @@ function showResults() {
     ulEl.appendChild(liEl);
   }
 }
+
 
 function renderChart(){
 
@@ -151,6 +154,34 @@ function renderChart(){
         'rgba(255, 159, 64, 0.2)'
       ],
         borderColor: [
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
           'rgba(255,99,132,1)',
           'rgba(54, 162, 235, 1)',
           'rgba(255, 206, 86, 1)',
